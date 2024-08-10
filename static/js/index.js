@@ -1,5 +1,3 @@
-const 정답 = "APPLE";
-
 let attempts = 0;
 let index = 0;
 let timer;
@@ -7,9 +5,9 @@ let timer;
 function appStart() {
   const displayGameover = () => {
     const div = document.createElement("div");
-    div.innerText = "게임이 종료됐습니다.";
+    div.innerText = "GAME OVER";
     div.style =
-      "display:flex; justify-content:center; align-items:center; position:absolute; top:40vh; left:38%; background-color:white; width:200px; height:100px;";
+      "display:flex; justify-content:center; align-items:center; position:absolute; top:40vh; left:39.8%; background-color:white; width:200px; height:100px; border: 10px ridge #83cea7";
     document.body.appendChild(div);
   };
 
@@ -25,8 +23,12 @@ function appStart() {
     index = 0;
   };
 
-  const handleEnterKey = () => {
+  const handleEnterKey = async () => {
     let 맞은_갯수 = 0;
+
+    //서버에서 정답을 받아오는 코드
+    const 응답 = await fetch("/answer");
+    const 정답 = await 응답.json();
 
     for (let i = 0; i < 5; i++) {
       const block = document.querySelector(
